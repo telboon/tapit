@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <h4>Settings for {{ currUser.username }}</h4>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="setting-displayname" class="pr-2 mt-auto mb-auto">Display Name</label>
+        <input type="text" class="flex-grow-1" id="setting-displayname" [(ngModel)]="currUser.name" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="setting-email" class="pr-2 mt-auto mb-auto">Email</label>
+        <input type="text" class="flex-grow-1" id="setting-email" [(ngModel)]="currUser.email" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="setting-password" class="pr-2 mt-auto mb-auto">Change Password</label>
+        <input type="password" class="flex-grow-1" id="setting-password" [(ngModel)]="currUser.password" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="updateUser()" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+<div>

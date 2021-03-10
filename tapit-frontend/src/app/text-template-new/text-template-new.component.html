@@ -1,0 +1,66 @@
+<div class="row p-2">
+  <div class="col-12">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="campaignName" class="pr-2 mt-auto mb-auto">Text Template Name</label>
+        <input type="text" class="flex-grow-1" id="campaignName" [(ngModel)]="newTextTemplate.name" placeholder="Text Template Name">
+      </div>
+    </div>
+    <div class="row mt-3">
+        <div class="form-group col-12">
+          <label for="text-template-area">Text Template</label>
+          <textarea class="form-control flex" [(ngModel)]="newTextTemplate.templateStr" (ngModelChange)="updatePreview()" id="text-template-area" rows="6"></textarea>
+        </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="submitNewTextTemplate()" class="btn btn-primary ml-2">Save Text Template</button>
+        <button type="button" *ngIf="router.url !== '/text-template/new'" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#completeModal">Delete</button>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <div class="form-group col-12">
+          <label for="tags-available" class="pr-2 mt-auto mb-auto">Tags Available</label>
+          <div id="tags-available">
+            <ul>
+              <li>{{ '{' }}firstName{{ '}' }}</li>
+              <li>{{ '{' }}lastName{{ '}' }}</li>
+              <li>{{ '{' }}alias{{ '}' }}</li>
+              <li>{{ '{' }}phoneNumber{{ '}' }}</li>
+              <li>{{ '{' }}url{{ '}' }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <div class="form-group col-12">
+          <label for="new-text-preview" class="pr-2 mt-auto mb-auto">Preview</label>
+          <textarea class="form-control flex" [(ngModel)]="previewStr" id="new-text-preview" rows="6" disabled></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ newTextTemplate.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the text template?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-danger" (click)="deleteTextTemplate()" data-dismiss="modal">Delete Text Template</button>
+      </div>
+    </div>
+  </div>
+</div>

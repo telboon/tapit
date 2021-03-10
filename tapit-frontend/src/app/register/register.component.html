@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <h4>Login</h4>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="login-name" class="pr-2 mt-auto mb-auto">Name</label>
+        <input type="text" class="flex-grow-1" id="login-name" [(ngModel)]="name" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="login-username" class="pr-2 mt-auto mb-auto">Username</label>
+        <input type="text" class="flex-grow-1" id="register-username" [(ngModel)]="username" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="login-password" class="pr-2 mt-auto mb-auto">Password</label>
+        <input type="password" class="flex-grow-1" id="register-password" [(ngModel)]="password" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="login-username" class="pr-2 mt-auto mb-auto">Email</label>
+        <input type="text" class="flex-grow-1" id="register-email" [(ngModel)]="email" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="secret-code" class="pr-2 mt-auto mb-auto">Secret Code</label>
+        <input type="text" class="flex-grow-1" id="secret-code" [(ngModel)]="secretCode" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="register()" class="btn btn-primary">Register</button>
+      </div>
+    </div>
+  </div>
+<div>

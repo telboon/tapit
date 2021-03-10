@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-12 mb-3 d-flux">
+    <button type="button" *ngIf="currCampaign.currentStatus === 'Running'" (click)="pauseCampaign()" class="btn btn-warning mr-2">Pause Campaign</button>
+    <button type="button" *ngIf="currCampaign.currentStatus !== 'Running'" (click)="startCampaign()" class="btn btn-primary mr-2">Start Campaign</button>
+    <button type="button" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#completeModal">Delete</button>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Campaign Name</span>
+      </div>
+      <input type="text" class="form-control campaign-details" value="{{ currCampaign.name }}" readonly>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Campaign Size</span>
+      </div>
+      <input type="text" class="form-control campaign-details" value="{{ currCampaign.size }}" readonly>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Campaign Status</span>
+      </div>
+      <input type="text" class="form-control campaign-details" value="{{ currCampaign.currentStatus }}" readonly>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-12">
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">From</th>
+          <th scope="col">To</th>
+          <th scope="col">Currrent Status</th>
+          <th scope="col">Web Status</th>
+          <th scope="col">Web Route URL</th>
+          <th scope="col">Time Sent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let job of currCampaign.jobs">
+          <tr>
+            <td>{{ job.fromNum }}</td>
+            <td>{{ job.toNum }}</td>
+            <td>{{ job.currentStatus }}</td>
+            <td><span class="download-visits" (click)="downloadVisits(job.id)">{{ job.webStatus }}</span></td>
+            <td><a href="{{ job.fullUrl }}">{{ job.fullUrl }}</a></td>
+            <td>{{ job.timeSent | date:'dd-MMM-yyyy'}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ currCampaign.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the campaign?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-danger" (click)="deleteCampaign()" data-dismiss="modal">Delete Campaign</button>
+      </div>
+    </div>
+  </div>
+</div>

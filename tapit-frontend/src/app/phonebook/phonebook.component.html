@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" routerLink="/phonebook/new">New Phonebook</button>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-12">
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Phonebook Size</th>
+          <th scope="col">Create Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let phonebook of phonebookService.phonebooks">
+          <tr routerLink="/phonebook/{{ phonebook.id }}/edit">
+            <td>{{ phonebook.name }}</td>
+            <td>{{ phonebook.size }}</td>
+            <td>{{ phonebook.createDate | date:'dd-MMM-yyyy'}}</td>
+          </tr>
+        </ng-container>
+        <p *ngIf="phonebookService.phonebooks.length === 0">No phonebooks created yet. Create phonebooks by clicking <a routerLink="/phonebook/new">here</a></p>
+      </tbody>
+    </table>
+  </div>
+</div>

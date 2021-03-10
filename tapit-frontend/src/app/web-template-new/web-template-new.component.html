@@ -1,0 +1,99 @@
+<div class="row p-2">
+  <div class="col-12">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="campaignName" class="pr-2 mt-auto mb-auto">Web Template Name</label>
+        <input type="text" class="flex-grow-1" id="campaignName" [(ngModel)]="newWebTemplate.name" placeholder="Web Template Name">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="web-template-type">Web Template Type</label>
+        <select class="form-control" [(ngModel)]="newWebTemplate.templateType" id="web-template-type">
+          <option></option>
+          <option *ngFor="let templateEnum of webTemplateService.wTemplateEnum" [ngValue]="templateEnum.tag">{{templateEnum.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- for redirect -->
+    <ng-container *ngIf="newWebTemplate.templateType === 'redirect'">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="redirect-url" class="pr-2 mt-auto mb-auto">Redirect URL</label>
+        <input type="text" class="flex-grow-1" id="redirect-url" [(ngModel)]="newWebTemplate.redirectUrl" placeholder="https://www.attacker.com">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="positive-redirect" class="pr-2 mt-auto mb-auto">Positive Redirect UA (Comma separated, leave blank if unused)</label>
+        <input type="text" class="flex-grow-1" id="positive-redirect" [(ngModel)]="newWebTemplate.redirectAgent" placeholder="Windows NT">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="negative-redirect" class="pr-2 mt-auto mb-auto">Negative Redirect UA (Comma Seperated, leave blank if unused)</label>
+        <input type="text" class="flex-grow-1" id="negative-redirect" [(ngModel)]="newWebTemplate.redirectNegAgent" placeholder="Android,iPhone">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex">
+        <p><small><em>Use only either 'Positive' or 'Negative' redirect. DO NOT USE BOTH.</em></small></p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="placeholder-html" class="pr-2 mt-auto mb-auto">Placeholder HTML</label>
+        <textarea class="form-control flex" [(ngModel)]="newWebTemplate.redirectPlaceholderHtml" id="placeholder-html" rows="6"></textarea>
+      </div>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="newWebTemplate.templateType === 'harvester'">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="placeholder-harvest-html" class="pr-2 mt-auto mb-auto">Placeholder HTML</label>
+        <textarea class="form-control flex" [(ngModel)]="newWebTemplate.harvesterBeforeHtml" id="placeholder-harvest-html" rows="6"></textarea>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="after-html" class="pr-2 mt-auto mb-auto">After HTML</label>
+        <textarea class="form-control flex" [(ngModel)]="newWebTemplate.harvesterAfterHtml" id="after-html" rows="6"></textarea>
+      </div>
+    </div>
+    </ng-container>
+
+    <div class="row">
+      <div class="col-12 d-flex">
+        <p *ngIf="router.url !== '/web-template/new'"><small><em>Note: Changing web template may affect your existing campaigns</em></small></p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="submitNewWebTemplate()" class="btn btn-primary ml-2">Save Web Template</button>
+        <button type="button" *ngIf="router.url !== '/web-template/new'" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#completeModal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ newWebTemplate.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the text template?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-danger" (click)="deleteWebTemplate()" data-dismiss="modal">Delete Web Template</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" routerLink="/text-template/new">New Text Template</button>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-12">
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Create Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let textTemplate of textTemplateService.textTemplates">
+          <tr routerLink="/text-template/{{ textTemplate.id }}/edit">
+            <td>{{ textTemplate.name }}</td>
+            <td>{{ textTemplate.createDate | date:'dd-MMM-yyyy'}}</td>
+          </tr>
+        </ng-container>
+        <p *ngIf="textTemplateService.textTemplates.length === 0">No text template created yet. Create templates by clicking <a routerLink="/text-template/new">here</a></p>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <h4>Login</h4>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="login-username" class="pr-2 mt-auto mb-auto">Username</label>
+        <input type="text" class="flex-grow-1" id="login-username" [(ngModel)]="username" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="login-password" class="pr-2 mt-auto mb-auto">Password</label>
+        <input type="password" class="flex-grow-1" id="login-password" [(ngModel)]="password" >
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="login()" class="btn btn-primary mr-3">Login</button>
+        <button type="button" (click)="routeRegister()" class="btn btn-primary">Register</button>
+      </div>
+    </div>
+  </div>
+<div>

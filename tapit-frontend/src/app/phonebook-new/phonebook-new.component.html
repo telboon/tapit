@@ -1,0 +1,84 @@
+<div class="row p-2">
+  <div class="col-12">
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label for="campaignName" class="pr-2 mt-auto mb-auto">Phonebook Name</label>
+        <input type="text" class="flex-grow-1" id="campaignName" [(ngModel)]="newPhonebook.name" placeholder="Phonebook Name">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <label class="no-space-break mt-auto mb-auto pr-2" for="import-records">Import Records</label>
+        <div class="custom-file" id="import-records">
+          <input type="file" (change)="importPhoneRecords($event.target.files)" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 d-flex">
+        <p><small><em><a href="/assets/phonebook-template.xlsx">Download file template here.</a></em></small></p>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-12 d-flex">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Alias</th>
+              <th scope="col">Phone Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let phoneRecord of newPhoneRecords">
+              <tr>
+                <td>{{ phoneRecord.firstName }}</td>
+                <td>{{ phoneRecord.lastName }}</td>
+                <td>{{ phoneRecord.alias }}</td>
+                <td>{{ phoneRecord.phoneNumber }}</td>
+              </tr>
+            </ng-container>
+              <tr (keyup.enter)="insertAdditionalRecord()">
+                <td><input type="text" [(ngModel)]="additionalRecord.firstName" class="form-control" placeholder="firstName"></td>
+                <td><input type="text" [(ngModel)]="additionalRecord.lastName" class="form-control" placeholder="lastName"></td>
+                <td><input type="text" [(ngModel)]="additionalRecord.alias" class="form-control" placeholder="alias"></td>
+                <td><input type="text" [(ngModel)]="additionalRecord.phoneNumber" class="form-control" placeholder="phoneNumber"></td>
+              </tr>
+              <tr>
+                <p><small><em>Press enter to insert additional record</em></small></p>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="submitNewPhonebook()" class="btn btn-primary mr-2">Save Phonebook</button>
+        <button type="button" *ngIf="router.url !== '/phonebook/new'" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#completeModal">Delete</button>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ newPhonebook.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the phonebook?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-danger" (click)="deletePhonebook()" data-dismiss="modal">Delete Phonebook</button>
+      </div>
+    </div>
+  </div>
+</div>

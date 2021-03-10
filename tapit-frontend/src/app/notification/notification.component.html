@@ -1,0 +1,3 @@
+<div class="alert notification col-11 mx-auto" *ngFor="let notification of notificationService.notifications" [ngClass]="{'alert-success': notification.resultType === 'success', 'alert-danger': notification.resultType ==='failure'}" (click)=notificationService.closeNotification(notification)>
+{{ notification.text }}
+</div>

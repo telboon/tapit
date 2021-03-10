@@ -1,0 +1,14 @@
+.campaign-details:read-only {
+    background-color: white;
+}
+
+.download-visits {
+    color: #007bff;
+    cursor: pointer;
+}
+
+.download-visits:hover {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,0 +1,59 @@
+<div class="row p-2">
+  <div class="col-12">
+    <div class="row mt-3 mb-3">
+      <div class="col-12 d-flex">
+        <label for="campaignName" class="pr-2 mt-auto mb-auto">Campaign Name</label>
+        <input type="text" class="flex-grow-1" id="campaignName" [(ngModel)]="newCampaign.name" placeholder="Campaign Name">
+      </div>
+    </div>
+    <div class="row mt-3 mb-3">
+      <div class="col-12 d-flex">
+        <label for="newFromNum" class="pr-2 mt-auto mb-auto">From Number</label>
+        <input type="text" class="flex-grow-1" id="newFromNum" [(ngModel)]="newCampaign.fromNumber" placeholder="From Number">
+      </div>
+    </div>
+    <!-- Add phonebook & template via list -->  
+    <div class="form-group">
+      <label for="provider-select">Provider</label>
+      <select class="form-control" [(ngModel)]="newCampaign.providerTag" id="provider-select">
+        <option></option>
+        <option *ngFor="let providerEnum of providerService.providerEnums" [ngValue]="providerEnum.tag">{{providerEnum.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="phonebook-select">Phonebook</label>
+      <select class="form-control" (change)="updatePreviews()" [(ngModel)]="newCampaign.phonebookId" id="phonebook-select">
+        <option [ngValue]="0"></option>
+        <option *ngFor="let phonebook of phonebookService.phonebooks" [ngValue]="phonebook.id">{{phonebook.name}}: Size {{phonebook.size}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="text-template-select">Text Template</label>
+      <select class="form-control" (change)="updatePreviews()" [(ngModel)]="newCampaign.textTemplateId" id="text-template-select">
+        <option [ngValue]="0"></option>
+        <option *ngFor="let textTemplate of textTemplateService.textTemplates" [ngValue]="textTemplate.id">{{textTemplate.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="web-template-select">Web Template</label>
+      <select class="form-control" (change)="updatePreviews()" [(ngModel)]="newCampaign.webTemplateId" id="web-template-select">
+        <option [ngValue]="0"></option>
+        <option *ngFor="let webTemplate of webTemplateService.webTemplates" [ngValue]="webTemplate.id">{{webTemplate.name}}</option>
+      </select>
+    </div>
+ 
+    <div class="row mt-4">
+      <div class="col-12 d-flex">
+        <button type="button" (click)="submitNewCampaignRun()" class="btn btn-primary mr-2">Start</button>
+        <button type="button" (click)="submitNewCampaign()" class="btn btn-secondary ml-2">Save</button>
+      </div>
+    </div>
+    <div class="form-group mt-4">
+      <label for="template-preview" class="pr-2 mt-auto mb-auto">Template</label>
+      <textarea class="form-control flex" [(ngModel)]="templateStr" id="template-preview" rows="4" disabled></textarea>
+    </div>
+    <div class="form-group mt-2">
+      <label for="new-text-preview" class="pr-2 mt-auto mb-auto">Preview (First Entry)</label>
+      <textarea class="form-control flex" [(ngModel)]="previewStr" id="new-text-preview" rows="4" disabled></textarea>
+    </div>
+</div>
